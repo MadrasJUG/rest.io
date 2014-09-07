@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<project name="REST.IO" default="war" basedir=".">
+	
+	<property name="project.name" value="restio"/>
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="classes.dir" value="${basedir}/classes"/>
+	<property name="output.dir" value="${basedir}/output"/>
+
+	<path id="project.class.path">
+		<!-- <pathelement location="WEB-INF/lib/jersey-server.jar"/>
+        <pathelement location="WEB-INF/lib/jersey-common.jar"/>
+        <pathelement location="WEB-INF/lib/javax.ws.rs-api-2.0.jar"/> -->
+        <fileset dir="WEB-INF/lib">
+            <include name="*.jar"/>
+      </fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="${output.dir}"/>
+		<delete dir="${classes.dir}"/>
+	</target>
+	
+	<target name="compile">
+		<mkdir dir="${classes.dir}" />
+		<javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               classpathref="project.class.path"
+               debug="${javac.debug}"
+               debuglevel="${javac.debuglevel}"
+               optimize="${javac.optimize}"
+               deprecation="${javac.deprecation}" />
+	</target>
+	
+	<target name="jar" depends="compile">
+		<mkdir dir="${output.dir}" />
+		<jar destfile="${output.dir}/${project.name}.jar">
+			<fileset dir="${classes.dir}" />
+		</jar>
+	</target>
+	
+	<target name="war" depends="jar">
+		<war destfile="${output.dir}/${project.name}.war" webxml="${basedir}/WEB-INF/web.xml">
+			<zipfileset dir="${output.dir}" includes="${project.name}.jar" prefix="WEB-INF/lib" />
+			<zipfileset dir="WEB-INF/lib" includes="**" prefix="WEB-INF/lib" />
+		</war>
+	</target>
+</project>
