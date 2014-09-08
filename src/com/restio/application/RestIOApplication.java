@@ -16,7 +16,12 @@
 
 package com.restio.application;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.ws.rs.core.Application;
+
+import com.restio.resource.HelloWorldResource;
 
 /**
  * Resource registrator for REST.IO application
@@ -25,5 +30,12 @@ import javax.ws.rs.core.Application;
  *
  */
 public class RestIOApplication extends Application {
+	
+	@Override
+    public Set<Class<?>> getClasses() {
+        Set<Class<?>> classes = new HashSet<Class<?>>();
+        classes.add(HelloWorldResource.class);
 
+        return classes;
+    }
 }
