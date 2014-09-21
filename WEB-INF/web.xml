@@ -19,5 +19,10 @@
         <servlet-name>RestIO</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+    
+    <!-- Default landing view for the current application -->
+    <welcome-file-list>
+        <welcome-file>home.html</welcome-file>
+    </welcome-file-list>
 
 </web-app>

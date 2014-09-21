@@ -1,15 +1,14 @@
 <?xml version="1.0"?>
 <project name="REST.IO" default="war" basedir=".">
 	
-	<property name="project.name" value="restio"/>
+	<property file="${basedir}/build.properties"/>
+	
+	<!-- project specific parameters -->
 	<property name="src.dir" value="${basedir}/src"/>
 	<property name="classes.dir" value="${basedir}/classes"/>
 	<property name="output.dir" value="${basedir}/output"/>
 
 	<path id="project.class.path">
-		<!-- <pathelement location="WEB-INF/lib/jersey-server.jar"/>
-        <pathelement location="WEB-INF/lib/jersey-common.jar"/>
-        <pathelement location="WEB-INF/lib/javax.ws.rs-api-2.0.jar"/> -->
         <fileset dir="WEB-INF/lib">
             <include name="*.jar"/>
       </fileset>
@@ -42,6 +41,17 @@
 		<war destfile="${output.dir}/${project.name}.war" webxml="${basedir}/WEB-INF/web.xml">
 			<zipfileset dir="${output.dir}" includes="${project.name}.jar" prefix="WEB-INF/lib" />
 			<zipfileset dir="WEB-INF/lib" includes="**" prefix="WEB-INF/lib" />
+			
+			<zipfileset dir="${basedir}" includes="home.html" />
+			<zipfileset dir="${basedir}/web/css" includes="*.css" prefix="css"/>
+			<zipfileset dir="${basedir}/web/js" includes="*.js" prefix="js"/>
+			<zipfileset dir="${basedir}/web/images" includes="*.*" prefix="images"/>
 		</war>
+	</target>
+	
+	 <target name="copy" description="Copy the war into tomcat directory">
+		<copy todir="${tomcat.home}/webapps" verbose="true">
+			<fileset dir="${output.dir}" includes="*.war"/>
+		</copy>
 	</target>
 </project>
