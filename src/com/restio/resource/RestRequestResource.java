@@ -14,33 +14,33 @@
  * limitations under the License.
  */
 
-package com.restio.resource.test;
+package com.restio.resource;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.Provider;
 
-import org.junit.Test;
+import com.restio.common.ResourcePath;
+import com.restio.manager.Request;
 
 /**
+ * Main entry point for handling the request call from the client
  * 
  * @author tham
  *
  */
-
-@Provider
-public class HelloWorldResourceTest {
-
-	@Test
-	public void testHelloworld() {
-		Client client = ClientBuilder.newClient();
-		WebTarget webTarget = client.target("http://localhost:8080/restio/api").path("hello");
+@Path(ResourcePath.REQUEST)
+public class RestRequestResource {
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String request(@FormParam (value="requestJson") String requestJson) {
+		Request request;
 		
-		Response response = webTarget.request(MediaType.TEXT_PLAIN).get();
-		System.out.println(response.getStatus());
-		System.out.println(response.readEntity(String.class));
+		return requestJson;
 	}
 }

@@ -14,15 +14,23 @@
  * limitations under the License.
  */
 
-package com.restio.common;
+package com.restio.filter;
+
+import java.io.IOException;
+
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerRequestFilter;
 
 /**
- * Constant file for having the REST service resource path
  * 
  * @author tham
  *
  */
-public class ResourcePath {
-	public static final String HELLO = "hello";
-	public static final String REQUEST = "request";
+public class RequestLogFilter implements ContainerRequestFilter {
+
+	@Override
+	public void filter(ContainerRequestContext containerRequestContext) throws IOException {
+		System.out.println("Request log filter called");
+		System.out.println(containerRequestContext.getMethod());
+	}
 }

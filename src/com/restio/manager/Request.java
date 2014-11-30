@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package com.restio.common;
+package com.restio.manager;
+
+import java.util.List;
+
+import com.restio.manager.parameter.Parameter;
 
 /**
- * Constant file for having the REST service resource path
  * 
  * @author tham
  *
  */
-public class ResourcePath {
-	public static final String HELLO = "hello";
-	public static final String REQUEST = "request";
+public class Request {
+	private String url;
+	private Method method;
+	List<Parameter> parameters;
 }

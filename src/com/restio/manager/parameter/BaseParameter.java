@@ -14,15 +14,36 @@
  * limitations under the License.
  */
 
-package com.restio.common;
+package com.restio.manager.parameter;
 
 /**
- * Constant file for having the REST service resource path
  * 
  * @author tham
  *
  */
-public class ResourcePath {
-	public static final String HELLO = "hello";
-	public static final String REQUEST = "request";
+public abstract class BaseParameter implements Parameter {
+	protected String name;
+	protected String value;
+	protected ParameterType type;
+	
+	protected BaseParameter(String name, String value, ParameterType type) {
+		this.name  = name;
+		this.value = value;
+		this.type = type;
+	}
+	
+	@Override
+	public ParameterType getType() {
+		return type;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String getValue() {
+		return value;
+	}	
 }

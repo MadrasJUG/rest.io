@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package com.restio.common;
+package com.restio.manager;
 
 /**
- * Constant file for having the REST service resource path
  * 
  * @author tham
  *
  */
-public class ResourcePath {
-	public static final String HELLO = "hello";
-	public static final String REQUEST = "request";
+public enum Method {
+	DELETE,
+	GET,
+	HEAD,
+	OPTIONS,
+	POST,
+	PUT
 }
