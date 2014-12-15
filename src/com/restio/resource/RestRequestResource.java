@@ -24,7 +24,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.restio.common.ResourcePath;
-import com.restio.manager.Request;
+import com.restio.model.Request;
 
 /**
  * Main entry point for handling the request call from the client

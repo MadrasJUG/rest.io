@@ -25,4 +25,7 @@ package com.restio.common;
 public class ResourcePath {
 	public static final String HELLO = "hello";
 	public static final String REQUEST = "request";
+	
+	public static final String DEMO_GET = "demo/get";
+	public static final String DEMO_POST = "demo/post";
 }

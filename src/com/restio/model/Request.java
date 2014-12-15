@@ -14,16 +14,38 @@
  * limitations under the License.
  */
 
-package com.restio.manager.parameter;
+package com.restio.model;
+
+import java.util.List;
 
 /**
  * 
  * @author tham
  *
  */
-public class PathParameter extends BaseParameter {
+public class Request {
+	private String url;
+	private Method method;
+	private List<Parameter> parameters;
+	
+	public Request(String url, Method method) {
+		this.url  = url;
+		this.method = method;
+	}
 
-	protected PathParameter(String name, String value) {
-		super(name, value, ParameterType.PATH);
+	public String getUrl() {
+		return url;
+	}
+
+	public Method getMethod() {
+		return method;
+	}
+	
+	public List<Parameter> getParameters() {
+		return parameters;
+	}
+	
+	public void setParameters( List<Parameter> parameters) {
+		this.parameters = parameters;
 	}
 }

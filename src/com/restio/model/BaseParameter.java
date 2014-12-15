@@ -14,15 +14,36 @@
  * limitations under the License.
  */
 
-package com.restio.manager.parameter;
+package com.restio.model;
 
 /**
  * 
  * @author tham
  *
  */
-public interface Parameter {
-	ParameterType getType();
-	String getName();
-	String getValue();
+public abstract class BaseParameter implements Parameter {
+	protected String name;
+	protected String value;
+	protected ParameterType type;
+	
+	public BaseParameter(String name, String value, ParameterType type) {
+		this.name  = name;
+		this.value = value;
+		this.type = type;
+	}
+	
+	@Override
+	public ParameterType getType() {
+		return type;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String getValue() {
+		return value;
+	}	
 }

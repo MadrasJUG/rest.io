@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package com.restio.manager;
+package com.restio.model;
 
 /**
  * 
  * @author tham
  *
  */
-public enum Method {
-	DELETE,
-	GET,
-	HEAD,
-	OPTIONS,
-	POST,
-	PUT
+public interface Parameter {
+	ParameterType getType();
+	String getName();
+	String getValue();
 }

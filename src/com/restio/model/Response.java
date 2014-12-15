@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.restio.manager;
+package com.restio.model;
 
 /**
  * 

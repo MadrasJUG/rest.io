@@ -14,30 +14,16 @@
  * limitations under the License.
  */
 
-package com.restio.application;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.ws.rs.core.Application;
-
-import com.restio.resource.HelloWorldResource;
-import com.restio.resource.demo.GetResource;
+package com.restio.model;
 
 /**
- * Resource registrator for REST.IO application
  * 
  * @author tham
  *
  */
-public class RestIOApplication extends Application {
-	
-	@Override
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> classes = new HashSet<Class<?>>();
-        classes.add(HelloWorldResource.class);
-
-        classes.add(GetResource.class);
-        return classes;
-    }
+public enum ResponseType {
+	JSON,
+	XML,
+	TEXT,
+	HTML;
 }

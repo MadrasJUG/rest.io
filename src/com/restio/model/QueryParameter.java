@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package com.restio.manager;
-
-import java.util.List;
-
-import com.restio.manager.parameter.Parameter;
+package com.restio.model;
 
 /**
  * 
  * @author tham
  *
  */
-public class Request {
-	private String url;
-	private Method method;
-	List<Parameter> parameters;
+public class QueryParameter extends BaseParameter {
+
+	public QueryParameter(String name, String value) {
+		super(name, value, ParameterType.QUERY);
+	}
 }
