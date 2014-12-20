@@ -23,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -34,12 +35,24 @@ import org.junit.Test;
 @Provider
 public class HelloWorldResourceTest {
 
+	@Ignore
 	@Test
 	public void testHelloworld() {
 		Client client = ClientBuilder.newClient();
 		WebTarget webTarget = client.target("http://localhost:8080/restio/api").path("hello");
 		
 		Response response = webTarget.request(MediaType.TEXT_PLAIN).get();
+		System.out.println(response.getStatus());
+		System.out.println(response.readEntity(String.class));
+	}
+	
+	@Test
+	public void testCustomWriter() {
+		System.out.println("testCustomWriter called");
+		Client client = ClientBuilder.newClient();
+		WebTarget webTarget = client.target("http://localhost:8080/restio/api").path("hello/provider");
+		
+		Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
 		System.out.println(response.getStatus());
 		System.out.println(response.readEntity(String.class));
 	}

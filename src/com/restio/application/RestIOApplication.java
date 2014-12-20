@@ -21,6 +21,7 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import com.restio.provider.RequestJsonWriter;
 import com.restio.resource.HelloWorldResource;
 import com.restio.resource.demo.GetResource;
 
@@ -31,13 +32,29 @@ import com.restio.resource.demo.GetResource;
  *
  */
 public class RestIOApplication extends Application {
+	private Set<Object> singletons = new HashSet<Object>(8);
+	private Set<Class<?>> classes = new HashSet<Class<?>>(8);
+	
+	public RestIOApplication() {
+		singletons.add(new HelloWorldResource());
+		singletons.add(new GetResource());
+		
+		singletons.add(new RequestJsonWriter());
+	}
 	
 	@Override
     public Set<Class<?>> getClasses() {
-        Set<Class<?>> classes = new HashSet<Class<?>>();
+        //Register resources
         classes.add(HelloWorldResource.class);
-
         classes.add(GetResource.class);
+        
+        //Register providers (writers and readers)
+        classes.add(RequestJsonWriter.class);
         return classes;
     }
+
+	@Override
+	public Set<Object> getSingletons() {
+		return singletons;
+	}
 }

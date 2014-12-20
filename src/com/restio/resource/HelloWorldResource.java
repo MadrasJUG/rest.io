@@ -22,6 +22,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.restio.common.ResourcePath;
+import com.restio.model.Method;
+import com.restio.model.Request;
 
 /**
  * Sample resource for validating the REST service
@@ -37,5 +39,12 @@ public class HelloWorldResource {
 	public String sayHello() {
 		return "Hello REST.IO";
 	}
-
+	
+	@Path("provider")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public Request getObject() {
+		Request request = new Request("/Tham", Method.GET);
+		return request;
+	}
 }
