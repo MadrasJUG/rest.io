@@ -50,30 +50,29 @@ task copyFiles(type: Copy) {
 }
 
 task compile (type: JavaCompile) {
-    source = file('src')
-    classpath = sourceSets.main.compileClasspath
-    destinationDir = file('classes')
-    println 'done'
+  source = file('src')
+  classpath = sourceSets.main.compileClasspath
+  destinationDir = file('classes')
+  println 'done'
 }
 
 task customJar(type: Jar) {
   archiveName = 'restio.jar'
   destinationDir = file('output')
- }
-
- task customWar(type: War) {
- from file('home.html')
- archiveName = 'restio.war'
- webInf { from 'WEB-INF' }
- destinationDir = file('output')
 }
 
-task copyWar(type:copy) {
-      from file('output')
-       includes = '*.war'
-      into '${tomcat.home}/webapps'
+task customWar(type: War) {
+  from file('home.html')
+  archiveName = 'restio.war'
+  webInf { from 'WEB-INF' }
+  destinationDir = file('output')
+}
 
+task copyWar(type:Copy) {
+  from file('output')
+  include  '*.war'
+  into '${tomcat.home}/webapps'
 }
 
 
-defaultTasks 'clean','Copy','compile', 'customJar','customWar'
+defaultTasks 'clean','CopyFiles','compile', 'customJar' ,'customWar' 
