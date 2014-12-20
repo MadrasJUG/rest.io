@@ -7,42 +7,39 @@ repositories {
 }
 
 dependencies {
-    
-    compile     'org.glassfish.hk2.external:aopalliance-repackaged:2.3.0-b05'
-    compile     'org.ow2.asm:asm-debug-all:5.0.2'
+  compile     'org.glassfish.hk2.external:aopalliance-repackaged:2.3.0-b05'
+  compile     'org.ow2.asm:asm-debug-all:5.0.2'
 
-    compile     'org.glassfish.hk2:hk2-api:2.3.0-b05'
-    compile     'org.glassfish.hk2:hk2-locator:2.3.0-b05'
+  compile     'org.glassfish.hk2:hk2-api:2.3.0-b05'
+  compile     'org.glassfish.hk2:hk2-locator:2.3.0-b05'
 
-    compile     'org.glassfish.hk2:hk2-utils:2.3.0-b05'
-    compile     'org.javassist:javassist:3.18.1-GA'
+  compile     'org.glassfish.hk2:hk2-utils:2.3.0-b05'
+  compile     'org.javassist:javassist:3.18.1-GA'
 
 
-    compile    'javax.annotation:javax.annotation-api:1.2-b02'
-    compile    'org.glassfish.hk2.external:javax.inject:2.3.0-b05'
+  compile    'javax.annotation:javax.annotation-api:1.2-b02'
+  compile    'org.glassfish.hk2.external:javax.inject:2.3.0-b05'
 
-    compile    'javax.servlet:javax.servlet-api:3.0.1'
-    compile    'javax.ws.rs:javax.ws.rs-api:2.0-m10'
+  compile    'javax.servlet:javax.servlet-api:3.0.1'
+  compile    'javax.ws.rs:javax.ws.rs-api:2.0-m10'
 
-    compile    'javax.xml.bind:jaxb-api:2.2.7'
-    compile    'com.sun.jersey:jersey-client:1.17.1'
+  compile    'javax.xml.bind:jaxb-api:2.2.7'
+  compile    'com.sun.jersey:jersey-client:1.17.1'
 
-    compile    'org.glassfish.jersey.core:jersey-common:2.0-m01'
-    compile    'org.glassfish.jersey.containers:jersey-container-servlet-core:2.6'
+  compile    'org.glassfish.jersey.core:jersey-common:2.0-m01'
+  compile    'org.glassfish.jersey.containers:jersey-container-servlet-core:2.6'
 
-    compile    'org.glassfish.jersey.containers:jersey-container-servlet:2.0-m04'
-    compile    'org.glassfish.jersey.bundles:jaxrs-ri:2.11'
+  compile    'org.glassfish.jersey.containers:jersey-container-servlet:2.0-m04'
+  compile    'org.glassfish.jersey.bundles:jaxrs-ri:2.11'
 
-    compile    'com.sun.jersey:jersey-server:1.18.1'
-    compile    'org.osgi:org.osgi.core:4.2.0'
+  compile    'com.sun.jersey:jersey-server:1.18.1'
+  compile    'org.osgi:org.osgi.core:4.2.0'
 
-    compile    'org.glassfish.hk2:osgi-resource-locator:1.0.1'
-    compile    'javax.persistence:persistence-api:1.0'
+  compile    'org.glassfish.hk2:osgi-resource-locator:1.0.1'
+  compile    'javax.persistence:persistence-api:1.0'
 
-    compile    'javax.validation:validation-api:1.1.0.Final'
-
- }
-
+  compile    'javax.validation:validation-api:1.1.0.Final'
+}
 
 task copyFiles(type: Copy) {
   from sourceSets.main.compileClasspath
@@ -50,30 +47,29 @@ task copyFiles(type: Copy) {
 }
 
 task compile (type: JavaCompile) {
-    source = file('src')
-    classpath = sourceSets.main.compileClasspath
-    destinationDir = file('classes')
-    println 'done'
+  source = file('src')
+  classpath = sourceSets.main.compileClasspath
+  destinationDir = file('classes')
+  println 'done'
 }
 
 task customJar(type: Jar) {
   archiveName = 'restio.jar'
   destinationDir = file('output')
- }
-
- task customWar(type: War) {
- from file('home.html')
- archiveName = 'restio.war'
- webInf { from 'WEB-INF' }
- destinationDir = file('output')
 }
 
-task copyWar(type:copy) {
-      from file('output')
-       includes = '*.war'
-      into '${tomcat.home}/webapps'
+task customWar(type: War) {
+  from file('home.html')
+  archiveName = 'restio.war'
+  webInf { from 'WEB-INF' }
+  destinationDir = file('output')
+}
 
+task copyWar(type:Copy) {
+  from file('output')
+  include  '*.war'
+  into '${tomcat.home}/webapps'
 }
 
 
-defaultTasks 'clean','Copy','compile', 'customJar','customWar'
+defaultTasks 'clean','CopyFiles','compile', 'customJar' ,'customWar' 
