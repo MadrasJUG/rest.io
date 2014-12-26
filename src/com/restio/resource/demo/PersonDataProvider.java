@@ -34,6 +34,22 @@ public class PersonDataProvider {
 		return instance;
 	}
 	
+	public Person getPerson(String id) {
+		return personMap.get(id);
+	}
+	
+	public void addPerson(Person person) {
+		 personMap.put(person.getId(), person);
+	}
+	
+	public void updatePerson(String id, Person person) {
+		personMap.put(id, person);
+	}
+	
+	public void deletePerson(String id) {
+		personMap.remove(id);
+	}
+	
 	static {
 		personMap.put("1", new Person("1", "Roy", "Fielding"));
 		personMap.put("2", new Person("2", "Emily", "Mia"));
